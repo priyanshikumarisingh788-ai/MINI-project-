@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .header{
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+        }
+    </style>
+</head>
+    <body>
+        <div class = "header">
+            <h1>Student List</h1>
+            <h1><a href = "/courses">Go to Course</a></h1>
+        </div>
+        {% if students|length != 0 %}
+        <table id = "all-students" border="2px">
+            <tr>
+                <th>SNo</th>
+                <th>Roll Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="/student/{{student.student_id}}">{{student.roll_number}}</a></td>
+                <td>{{student.first_name}}</td>
+                <td>{{student.last_name}}</td>
+                <td>
+                    <a href="/student/{{student.student_id}}/update">Update</a>
+                    <a href="/student/{{student.student_id}}/delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p> No student found. Add the student now!</p>
+            <a href = "/student/create">Add a Student</a>
+        {% endif %}
+        <br><br>
+
+        <a href="/student/create"> + Add Student</a>
+    </body>
+</html>
